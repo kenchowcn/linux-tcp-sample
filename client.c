@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         return -1;
     }  
      
-	memset(&remote_addr, 0, sizeof(remote_addr));
+    memset(&remote_addr, 0, sizeof(remote_addr));
     remote_addr.sin_family = AF_INET; 
     remote_addr.sin_addr.s_addr = inet_addr(REMOTE_IP);
     remote_addr.sin_port = htons(PORT);
@@ -32,16 +32,16 @@ int main(int argc, char *argv[])
         return -1;  
     }  
 
-	printf("Start client ... \n");
+    printf("Start client ... \n");
     while(1)  
     {  
         len=send(fd, buf, strlen(buf), 0);  
         len=recv(fd, buf, BUFSIZ, 0);  
         buf[len] = '\0';  
         printf("recv: %s\n", buf);
-		sleep(1); 
+	sleep(1); 
     }
   
     close(fd);
-	return 0;  
+    return 0;  
 }  
