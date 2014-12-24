@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         return -1;  
     }
 	
-	memset(&local_addr, 0,sizeof(local_addr));
+    memset(&local_addr, 0,sizeof(local_addr));
     local_addr.sin_family = AF_INET;
     local_addr.sin_addr.s_addr = INADDR_ANY;
     local_addr.sin_port=htons(PORT);
@@ -40,12 +40,13 @@ int main(int argc, char *argv[])
         return -1;  
     }
 	
-	printf("Start server ... \n");
+    printf("Start server ... \n");
     while(1)
     {  
-		len = recv(new_fd, buf, BUFSIZ, 0);
+	len = recv(new_fd, buf, BUFSIZ, 0);
         buf[len] = '\0';
         printf("recv: %s\n", buf);  
+        
         if(0 > send(new_fd, buf, len, 0))  
         {  
             perror("write");
@@ -56,5 +57,5 @@ int main(int argc, char *argv[])
     close(new_fd);  
     close(sfd);  
     
-	return 0;  
+    return 0;  
 }  
