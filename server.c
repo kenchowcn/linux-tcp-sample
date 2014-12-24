@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include <sys/types.h>  
 #include <sys/socket.h>  
 #include <netinet/in.h>  
@@ -10,7 +11,8 @@
 int main(int argc, char *argv[])  
 {  
     int sfd, new_fd;
-    int len;  
+    int len; 
+    socklen_t socklen;
     struct sockaddr_in local_addr, remote_addr;
     char buf[BUFSIZ];
 
@@ -33,8 +35,8 @@ int main(int argc, char *argv[])
     
     listen(sfd, 10);  
       
-    len = sizeof(struct sockaddr_in);  
-    if (0 > (new_fd = accept(sfd, (struct sockaddr *)&remote_addr, &len)))  
+    socklen = sizeof(struct sockaddr_in);  
+    if (0 > (new_fd = accept(sfd, (struct sockaddr *)&remote_addr, &socklen)))  
     {  
         perror("accept");  
         return -1;  
